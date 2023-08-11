@@ -11,6 +11,7 @@ const dbConfig = {
 const jwtConfig = {
   secret: process.env.JWT_SECRET,
   expiresIn: process.env.JWT_EXPIRES_IN,
+  expiresInHours: process.env.JWT_EXPIRES_IN_HOURS,
 };
 
 const bcryptConfig = {

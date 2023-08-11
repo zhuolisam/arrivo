@@ -1,8 +1,7 @@
-const db = require('./index');
-
 // Define table creation statements
-const createTables = async () => {
-  await db.none(`
+const createTables = async (db) => {
+  await db.none(
+    `
       CREATE TABLE IF NOT EXISTS "User" (
         UserID SERIAL PRIMARY KEY,
         Username VARCHAR(255) NOT NULL,
@@ -10,6 +9,15 @@ const createTables = async () => {
         Email VARCHAR(255) NOT NULL,
         FullName VARCHAR(255),
         Membership VARCHAR(20) NOT NULL,
+        CreatedAt TIMESTAMP NOT NULL,
+        UpdatedAt TIMESTAMP NOT NULL
+      );
+
+      CREATE TABLE IF NOT EXISTS "Category" (
+        CategoryID SERIAL PRIMARY KEY,
+        Name VARCHAR(255) NOT NULL,
+        Description TEXT,
+        Activated BOOLEAN NOT NULL,
         CreatedAt TIMESTAMP NOT NULL,
         UpdatedAt TIMESTAMP NOT NULL
       );
@@ -24,16 +32,6 @@ const createTables = async () => {
         CreatedAt TIMESTAMP NOT NULL,
         UpdatedAt TIMESTAMP NOT NULL
       );
-
-      CREATE TABLE IF NOT EXISTS "Category" (
-        CategoryID SERIAL PRIMARY KEY,
-        Name VARCHAR(255) NOT NULL,
-        Description TEXT,
-        Activated BOOLEAN NOT NULL,
-        CreatedAt TIMESTAMP NOT NULL,
-        UpdatedAt TIMESTAMP NOT NULL
-      );
-
       CREATE TABLE IF NOT EXISTS "Payment" (
         PaymentID SERIAL PRIMARY KEY,
         Amount DECIMAL(10, 2) NOT NULL,
@@ -42,9 +40,18 @@ const createTables = async () => {
         CreatedAt TIMESTAMP NOT NULL,
         UpdatedAt TIMESTAMP NOT NULL
       );
-    `);
-
-  console.log('Tables created (if not exist)');
+    `,
+    []
+  );
 };
 
-module.exports = createTables;
+// Init once
+const db = require('../src/db/database');
+
+try {
+  createTables(db).finally(() => {
+    console.log('Tables initialized');
+  });
+} catch (error) {
+  console.log(error);
+}
