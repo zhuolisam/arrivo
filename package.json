@@ -8,7 +8,14 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "prettier": "prettier --check src/*.js",
-    "prettier:fix": "prettier --write src/*.js"
+    "prettier:fix": "prettier --write src/*.js",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint .",
+      "prettier --check src/*.j"
+    ]
   },
   "keywords": [
     "node js",
@@ -39,8 +46,10 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^5.0.0",
     "jest": "^27.5.1",
+    "lint-staged": "^13.2.3",
     "nodemon": "^3.0.1",
     "prettier": "^3.0.1",
-    "supertest": "^6.2.2"
+    "supertest": "^6.2.2",
+    "husky": "^8.0.0"
   }
 }
