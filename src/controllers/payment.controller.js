@@ -88,11 +88,9 @@ const handleWebhook = catchAsync(async (req, res) => {
     const paid_amount_parse = parseFloat(paid_amount) / 100;
     // Update user's membership status
     if (payment.status === 'paid' && paid_amount_parse === premiumPrice) {
-      console.log('Updating user membership to premium');
-      const result = await userModel.updateUserMembershipById(payment.userid, {
+      await userModel.updateUserMembershipById(payment.userid, {
         membership: roleType.PREMIUM,
       });
-      console.log(result);
     }
   } catch (error) {
     console.error('Error updating payment status:', error);
