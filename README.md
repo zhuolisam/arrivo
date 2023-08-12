@@ -73,30 +73,30 @@ List of available routes:
 `DELETE api/v1/users/:userId` - delete user
 
 **Category routes**:\
-`POST /v1/categories` - create a new category
-`GET /v1/categories` - get all categories
-`GET /v1/categories/:categoryId` - get category by ID
-`PATCH /v1/categories/:categoryId` - update category by ID
+`POST /v1/categories` - create a new category\
+`GET /v1/categories` - get all categories\
+`GET /v1/categories/:categoryId` - get category by ID\
+`PATCH /v1/categories/:categoryId` - update category by ID\
 `DELETE /v1/categories/:categoryId` - delete category by ID
 
 **Post routes**:\
-`POST /v1/posts` - create a new post
-`GET /v1/posts` - get all posts
-`GET /v1/posts/:postId` - get post by ID
-`PATCH /v1/posts/:postId` - update post by ID
+`POST /v1/posts` - create a new post\
+`GET /v1/posts` - get all posts\
+`GET /v1/posts/:postId` - get post by ID\
+`PATCH /v1/posts/:postId` - update post by ID\
 `DELETE /v1/posts/:postId` - delete post by ID
 
 **Payment routes**:\
-`POST /v1/payment/create` - create a new payment for premium membership
+`POST /v1/payment/create` - create a new payment for premium membership\
 `POST /v1/payment/webhook` - webhook for Billplz updates
 
-For all the required params and body inputs, please visit the `validations\` folder
+*For all the required params and body inputs, please visit the `validations\` folder*
 
 ## Notes
 
 1. All routes are protected, please login using admin, normal, premium to obtain the jwt token, include them in your subsequent call.
 
-If you have seeded database properly, you can get the response from here
+If you have seeded database properly, you can get the JWT token from output of these commands
 
 ```
 curl -X POST \
@@ -120,8 +120,8 @@ curl -X POST \
 
 ## Demo
 This demo shows the upgrading of normal user to premium user
-[gif]('./assets/demo.gif')
+![gif](assets/demo.gif)
 
 
 My webhook endpoint works, there are incoming Billplz request hitting webhook (tunneling using ngrok)
-[png]('./assets/ngrok-tunnel.png')
+![png](assets/ngrok-tunnel.png)
