@@ -34,6 +34,9 @@ const createTables = async (db) => {
       );
       CREATE TABLE IF NOT EXISTS "Payment" (
         PaymentID SERIAL PRIMARY KEY,
+        BillID VARCHAR(255),
+        BillplzTransactionID VARCHAR(255),
+        UserID INTEGER REFERENCES "User" (UserID),
         Amount DECIMAL(10, 2) NOT NULL,
         PaymentMethod VARCHAR(255),
         Status VARCHAR(20) NOT NULL,

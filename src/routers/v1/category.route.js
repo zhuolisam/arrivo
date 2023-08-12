@@ -1,9 +1,9 @@
 const express = require('express');
-const categoryController = require('../controllers/category.controller');
-const validate = require('../middlewares/validate');
-const auth = require('../middlewares/auth');
-const categoryValidation = require('../validations/category.validation');
-const roleType = require('../config/roles');
+const categoryController = require('../../controllers/category.controller');
+const validate = require('../../middlewares/validate');
+const auth = require('../../middlewares/auth');
+const categoryValidation = require('../../validations/category.validation');
+const roleType = require('../../config/roles');
 
 const router = express.Router();
 

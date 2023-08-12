@@ -1,9 +1,9 @@
 const express = require('express');
-const userController = require('../controllers/user.controller');
-const validate = require('../middlewares/validate');
-const auth = require('../middlewares/auth');
-const userValidation = require('../validations/user.validation');
-const roleType = require('../config/roles');
+const userController = require('../../controllers/user.controller');
+const validate = require('../../middlewares/validate');
+const auth = require('../../middlewares/auth');
+const userValidation = require('../../validations/user.validation');
+const roleType = require('../../config/roles');
 
 const router = express.Router();
 

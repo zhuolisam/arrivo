@@ -7,7 +7,7 @@ const httpStatus = require('http-status');
 
 const ApiError = require('./utils/ApiError');
 const { errorConverter, errorHandler } = require('./middlewares/error');
-const routes = require('./routers');
+const routes = require('./routers/v1');
 
 // CONFIG
 const port = process.env.PORT || 5000;
@@ -25,18 +25,18 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-app.use('/api', routes);
+app.use('/api/v1', routes);
 
 // send back a 404 error for any unknown api request
-app.use((req, res, next) => {
-  next(new ApiError(httpStatus.NOT_FOUND, 'Not found'));
-});
+// app.use((req, res, next) => {
+//   next(new ApiError(httpStatus.NOT_FOUND, 'Not found'));
+// });
 
-// convert error to ApiError, if needed
-app.use(errorConverter);
+// // convert error to ApiError, if needed
+// app.use(errorConverter);
 
-// handle error
-app.use(errorHandler);
+// // handle error
+// app.use(errorHandler);
 
 // configure ports
 app.listen(port, () => {

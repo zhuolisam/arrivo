@@ -1,9 +1,9 @@
 const express = require('express');
-const postController = require('../controllers/post.controller');
-const validate = require('../middlewares/validate');
-const auth = require('../middlewares/auth');
-const postValidation = require('../validations/post.validation');
-const roleType = require('../config/roles');
+const postController = require('../../controllers/post.controller');
+const validate = require('../../middlewares/validate');
+const auth = require('../../middlewares/auth');
+const postValidation = require('../../validations/post.validation');
+const roleType = require('../../config/roles');
 
 const router = express.Router();
 

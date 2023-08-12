@@ -29,6 +29,7 @@
     "no-console": "off",
     "func-names": "off",
     "no-plusplus": "off",
+    "camelcase": "off",
     "class-methods-use-this": "off"
   }
 }

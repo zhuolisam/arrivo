@@ -82,6 +82,20 @@ const updateUserById = async (userId, userData) => {
   return result;
 };
 
+// update membership
+const updateUserMembershipById = async (userId, userData) => {
+  const query = `
+        UPDATE "User"
+        SET Membership = $1,
+            UpdatedAt = $2
+        WHERE userid = $3
+        RETURNING *;
+      `;
+  const values = [userData.membership, new Date(), userId];
+  const result = await db.one(query, values);
+  return result;
+};
+
 const deleteUserById = async (userId) => {
   const query = `
         DELETE FROM "User" WHERE userid = $1;
@@ -95,5 +109,6 @@ module.exports = {
   getUserById,
   getUserByEmail,
   updateUserById,
+  updateUserMembershipById,
   deleteUserById,
 };
