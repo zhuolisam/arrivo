@@ -1,67 +1,67 @@
 const UserModel = require('../src/models/user.model');
 const PostModel = require('../src/models/post.model');
 const CategoryModel = require('../src/models/category.model');
-const { generateHashedPasword } = require('../src/utils/hashPassword');
 
 // Define seed data
 const seedData = async (db) => {
   // Seed users
   await UserModel.createUser(
     {
-      Username: 'admin',
-      Password: await generateHashedPasword('adminpassword'),
-      Email: 'admin@example.com',
-      FullName: 'Admin User',
-      Membership: 'Admin',
-      CreatedAt: new Date(),
-      UpdatedAt: new Date(),
-    },
-    db
-  );
-  await UserModel.createUser(
-    {
-      Username: 'normaluser',
-      Password: await generateHashedPasword('normalpassword'),
-      Email: 'normal@example.com',
-      FullName: 'Normal User',
-      Membership: 'Normal',
-      CreatedAt: new Date(),
-      UpdatedAt: new Date(),
+      username: 'admin',
+      password: 'adminpassword',
+      email: 'admin@example.com',
+      fullname: 'Admin User',
+      membership: 'Admin',
+      createdat: new Date(),
+      updatedat: new Date(),
     },
     db
   );
 
   await UserModel.createUser(
     {
-      Username: 'premiumuser',
-      Password: await generateHashedPasword('premiumpassword'),
-      Email: 'premium@example.com',
-      FullName: 'Premium User',
-      Membership: 'Premium',
-      CreatedAt: new Date(),
-      UpdatedAt: new Date(),
+      username: 'normaluser',
+      password: 'normalpassword',
+      email: 'normal@example.com',
+      fullname: 'Normal User',
+      membership: 'Normal',
+      createdat: new Date(),
+      updatedat: new Date(),
+    },
+    db
+  );
+
+  await UserModel.createUser(
+    {
+      username: 'premiumuser',
+      password: 'premiumpassword',
+      email: 'premium@example.com',
+      fullname: 'Premium User',
+      membership: 'Premium',
+      createdat: new Date(),
+      updatedat: new Date(),
     },
     db
   );
 
   await CategoryModel.createCategory(
     {
-      Name: 'Biology',
-      Description: 'Biology Post',
-      Activated: true,
-      CreatedAt: new Date(),
-      UpdatedAt: new Date(),
+      name: 'Biology',
+      description: 'Biology Post',
+      activated: true,
+      createdat: new Date(),
+      updatedat: new Date(),
     },
     db
   );
 
   await CategoryModel.createCategory(
     {
-      Name: 'Chemistry',
-      Description: 'Chemistry Post',
-      Activated: true,
-      CreatedAt: new Date(),
-      UpdatedAt: new Date(),
+      name: 'Chemistry',
+      description: 'Chemistry Post',
+      activated: true,
+      createdat: new Date(),
+      updatedat: new Date(),
     },
     db
   );
@@ -69,26 +69,26 @@ const seedData = async (db) => {
   // Seed posts
   await PostModel.createPost(
     {
-      Title: 'Normal Post',
-      Body: 'This is a normal post.',
-      CategoryID: 1,
-      Status: 'Published',
-      Label: 'Normal',
-      CreatedAt: new Date(),
-      UpdatedAt: new Date(),
+      title: 'Normal Post',
+      body: 'This is a normal post.',
+      categoryid: 1,
+      status: 'Published',
+      label: 'Normal',
+      createdat: new Date(),
+      updatedat: new Date(),
     },
     db
   );
 
   await PostModel.createPost(
     {
-      Title: 'Premium Post',
-      Body: 'This is a premium post.',
-      CategoryID: 2,
-      Status: 'Published',
-      Label: 'Premium',
-      CreatedAt: new Date(),
-      UpdatedAt: new Date(),
+      title: 'Premium Post',
+      body: 'This is a premium post.',
+      categoryid: 2,
+      status: 'Published',
+      label: 'Premium',
+      createdat: new Date(),
+      updatedat: new Date(),
     },
     db
   );

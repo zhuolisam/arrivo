@@ -7,13 +7,13 @@ const createPost = async (postData) => {
         RETURNING *;
         `;
   const values = [
-    postData.Title,
-    postData.Body,
-    postData.CategoryID,
-    postData.Status,
-    postData.Label,
-    postData.CreatedAt,
-    postData.UpdatedAt,
+    postData.title,
+    postData.body,
+    postData.categoryid,
+    postData.status,
+    postData.label,
+    postData.createdat,
+    postData.updatedat,
   ];
   const result = await db.one(query, values);
   return result;

@@ -10,30 +10,39 @@ const createUser = async (userData) => {
       `;
 
   const values = [
-    userData.Username,
-    generateHashedPasword(userData.Password),
-    userData.Email,
-    userData.FullName,
-    userData.Membership,
-    userData.CreatedAt,
-    userData.UpdatedAt,
+    userData.username,
+    await generateHashedPasword(userData.password),
+    userData.email,
+    userData.fullname,
+    userData.membership || 'Normal',
+    new Date(),
+    new Date(),
   ];
 
-  const result = await db.one(query, values);
+  const user = await db.one(query, values);
+  const result = {
+    userId: user.userid,
+    username: user.username,
+    email: user.email,
+    fullname: user.fullname,
+    membership: user.membership,
+  };
   return result;
 };
 
 const getUsers = async () => {
   const query = `
-        SELECT * FROM "User";
-      `;
+    SELECT "username", "email", "fullname", "membership", "createdat", "updatedat"
+    FROM "User";
+  `;
   const result = await db.any(query);
   return result;
 };
 
 const getUserById = async (userId) => {
   const query = `
-        SELECT * FROM "User" WHERE UserID = $1;
+    SELECT 
+    FROM "User" WHERE userid = $1;
       `;
   const result = await db.oneOrNone(query, [userId]);
   return result;
@@ -41,7 +50,8 @@ const getUserById = async (userId) => {
 
 const getUserByEmail = async (email) => {
   const query = `
-        SELECT * FROM "User" WHERE Email = $1;
+        SELECT *
+        FROM "User" WHERE email = $1;
       `;
   const result = await db.oneOrNone(query, [email]);
   return result;
@@ -56,16 +66,16 @@ const updateUserById = async (userId, userData) => {
             FullName = $4,
             Membership = $5,
             UpdatedAt = $6
-        WHERE UserID = $7
+        WHERE userid = $7
         RETURNING *;
       `;
   const values = [
-    userData.Username,
-    userData.Password,
-    userData.Email,
-    userData.FullName,
-    userData.Membership,
-    userData.UpdatedAt,
+    userData.username,
+    await generateHashedPasword(userData.password),
+    userData.email,
+    userData.fullname,
+    userData.membership,
+    new Date(),
     userId,
   ];
   const result = await db.one(query, values);
@@ -74,7 +84,7 @@ const updateUserById = async (userId, userData) => {
 
 const deleteUserById = async (userId) => {
   const query = `
-        DELETE FROM "User" WHERE UserID = $1;
+        DELETE FROM "User" WHERE userid = $1;
       `;
   await db.none(query, [userId]);
 };

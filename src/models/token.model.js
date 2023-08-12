@@ -18,7 +18,7 @@ const generateAccessToken = (
   const payload = {
     sub: user.userid,
     iat: now.unix(),
-    role: user.membership,
+    membership: user.membership,
     type,
   };
 
@@ -28,8 +28,19 @@ const generateAccessToken = (
   return token;
 };
 
-const verifyToken = (token) => {
+const decodeToken = (token) => {
   const decoded = jwt.verify(token, jwtConfig.secret);
+  return decoded;
+};
+
+const verifyToken = (token) => {
+  // check if token is valid and not expired
+  const decoded = decodeToken(token);
+  const now = day();
+  const expiresAt = day.unix(decoded.exp);
+  if (now.isAfter(expiresAt)) {
+    return {};
+  }
   return decoded;
 };
 

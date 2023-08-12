@@ -6,8 +6,12 @@ const tokenModel = require('../models/token.model');
 const { verifyPassword } = require('../utils/hashPassword');
 
 const register = catchAsync(async (req, res) => {
-  const user = await userModel.createUser(req.body);
-  res.status(httpStatus.CREATED).send({ user });
+  const user = await userModel.getUserByEmail(req.body.email);
+  if (user) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
+  }
+  const userResult = await userModel.createUser(req.body);
+  res.status(httpStatus.CREATED).send({ userResult });
 });
 
 const login = catchAsync(async (req, res) => {
@@ -15,7 +19,7 @@ const login = catchAsync(async (req, res) => {
 
   const user = await userModel.getUserByEmail(email);
 
-  if (!user || !verifyPassword(password, user.password)) {
+  if (!user || !(await verifyPassword(password, user.password))) {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect email or password');
   }
 
@@ -28,7 +32,7 @@ const login = catchAsync(async (req, res) => {
       fullname: user.fullName,
       membership: user.membership,
     },
-    tokens,
+    access_token: tokens,
   });
 });
 
