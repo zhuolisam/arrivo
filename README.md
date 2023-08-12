@@ -10,25 +10,29 @@ cp .env.example .env
 
 Recommended way:
 Before you proceed, please create a database called blog-app, and replaced necessary credentials in .env DATABASE_URL
+
 ```
 node seed/init.js     //initialise database tables
 node seed/seeder.js   //initialise mock data
 
 npm run start
 ```
+
 After testing everything
+
 ```
 node seed/cleanup.js //destory database
 ```
 
 Or docker way:
+
 ```bash
 docker-compose up --build
 ```
 
 ## Features
 
-- **PostgreSQL database**: using  [pg-promise](https://github.com/vitaly-t/pg-promise)
+- **PostgreSQL database**: using [pg-promise](https://github.com/vitaly-t/pg-promise)
 - **Authentication and authorization**: using JWT Access Token
 - **Validation**: request data validation using [Joi](https://github.com/hapijs/joi)
 - **Error handling**: centralized error handling mechanism
@@ -37,7 +41,6 @@ docker-compose up --build
 - **Docker support**
 - **Git hooks**: with [husky](https://github.com/typicode/husky) and [lint-staged](https://github.com/okonet/lint-staged)
 - **Linting**: with [ESLint](https://eslint.org) and [Prettier](https://prettier.io)
-
 
 ## Project Structure
 
@@ -53,6 +56,7 @@ src\
  |--validations\    # Request data validation schemas
  |--server.js       # Express app
 ```
+
 ### API Endpoints
 
 List of available routes:
@@ -86,13 +90,14 @@ List of available routes:
 `POST /v1/payment/create` - create a new payment for premium membership
 `POST /v1/payment/webhook` - webhook for Billplz updates
 
-
-For all the required params, inputs, please visit the `validations\` folder
+For all the required params and body inputs, please visit the `validations\` folder
 
 ## Notes
+
 1. All routes are protected, please login using admin, normal, premium to obtain the jwt token, include them in your subsequent call.
 
-If you have seeded properly, you can get the response from here
+If you have seeded database properly, you can get the response from here
+
 ```
 curl -X POST \
   -H "Content-Type: application/json" \
@@ -113,7 +118,10 @@ curl -X POST \
 
 2. Payment service is unavailable since webhook URL is not available
 
-
 ## Demo
+This demo shows the upgrading of normal user to premium user
+[gif]('./assets/demo.gif')
 
-[gif]('./assets)
+
+My webhook endpoint works, there are incoming Billplz request hitting webhook (tunneling using ngrok)
+[png]('./assets/ngrok-tunnel.png')
