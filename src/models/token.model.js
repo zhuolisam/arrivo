@@ -11,17 +11,14 @@ day.extend(duration);
 const generateAccessToken = (
   user,
   expiresIn = jwtConfig.expiresIn,
-  expiresInHours = jwtConfig.expiresInHours,
   secret = jwtConfig.secret,
   type = tokenTypes.ACCESS
 ) => {
   const now = day();
-  const expiration = now.add(day.duration(expiresInHours, 'hours'));
   const payload = {
-    sub: user.UserId,
-    iat: day().unix(),
-    exp: expiration.unix(),
-    role: user.Membership,
+    sub: user.userid,
+    iat: now.unix(),
+    role: user.membership,
     type,
   };
 

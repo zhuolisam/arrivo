@@ -11,11 +11,11 @@ const dbConfig = {
 const jwtConfig = {
   secret: process.env.JWT_SECRET,
   expiresIn: process.env.JWT_EXPIRES_IN,
-  expiresInHours: process.env.JWT_EXPIRES_IN_HOURS,
+  expiresInHours: parseInt(process.env.JWT_EXPIRES_IN_HOURS, 10),
 };
 
 const bcryptConfig = {
-  saltRounds: process.env.BCRYPT_SALT_ROUNDS,
+  saltRounds: parseInt(process.env.BCRYPT_SALT_ROUNDS, 10),
 };
 
 module.exports = {

@@ -1,5 +1,6 @@
 // Function to create a new user
 const db = require('../db/database');
+const { generateHashedPasword } = require('../utils/hashPassword');
 
 const createUser = async (userData) => {
   const query = `
@@ -10,7 +11,7 @@ const createUser = async (userData) => {
 
   const values = [
     userData.Username,
-    userData.Password,
+    generateHashedPasword(userData.Password),
     userData.Email,
     userData.FullName,
     userData.Membership,

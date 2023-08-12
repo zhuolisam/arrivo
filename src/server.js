@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
 
+const routes = require('./routers');
+
 // CONFIG
 const port = process.env.PORT || 5000;
 
@@ -19,6 +21,8 @@ app.use(cookieParser());
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
+
+app.use('/api', routes);
 
 // configure ports
 app.listen(port, () => {

@@ -1,6 +1,7 @@
 const UserModel = require('../src/models/user.model');
 const PostModel = require('../src/models/post.model');
 const CategoryModel = require('../src/models/category.model');
+const { generateHashedPasword } = require('../src/utils/hashPassword');
 
 // Define seed data
 const seedData = async (db) => {
@@ -8,7 +9,7 @@ const seedData = async (db) => {
   await UserModel.createUser(
     {
       Username: 'admin',
-      Password: 'adminpassword',
+      Password: await generateHashedPasword('adminpassword'),
       Email: 'admin@example.com',
       FullName: 'Admin User',
       Membership: 'Admin',
@@ -17,11 +18,10 @@ const seedData = async (db) => {
     },
     db
   );
-
   await UserModel.createUser(
     {
       Username: 'normaluser',
-      Password: 'normaluser',
+      Password: await generateHashedPasword('normalpassword'),
       Email: 'normal@example.com',
       FullName: 'Normal User',
       Membership: 'Normal',
@@ -34,7 +34,7 @@ const seedData = async (db) => {
   await UserModel.createUser(
     {
       Username: 'premiumuser',
-      Password: 'premiumpassword',
+      Password: await generateHashedPasword('premiumpassword'),
       Email: 'premium@example.com',
       FullName: 'Premium User',
       Membership: 'Premium',
