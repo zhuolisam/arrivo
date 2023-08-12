@@ -98,7 +98,7 @@ const handleWebhook = catchAsync(async (req, res) => {
   }
 
   // Respond with appropriate status
-  res.sendStatus(httpStatus.OK);
+  res.status(httpStatus.OK).send({ message: 'Payment successful' });
   return null;
 });
 

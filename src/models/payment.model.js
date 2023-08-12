@@ -31,7 +31,7 @@ const updatePaymentByBillId = async (billID, paymentData) => {
 
   const values = [
     paymentData.status,
-    paymentData.billplzpaymentid,
+    paymentData.billplztransactionid,
     new Date(),
     billID,
   ];

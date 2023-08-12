@@ -1,17 +1,26 @@
-# Use the official Node.js image
+# Use the official Node.js image with the desired version
 FROM node:18.3.0-alpine3.14
 
 # Set the working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install
+# Install dependencies (excluding Husky hooks)
+RUN npm install --production
 
-# Copy the rest of the application code
-COPY . .
+# Copy source code
+COPY src ./src
+
+# Copy .env file
+COPY .env ./
+
+# Copy seed data
+COPY seed ./seed
+
+# Run the seed 
+RUN node seed/init.js && node seed/seeder.js
 
 # Expose port
 EXPOSE 5000
