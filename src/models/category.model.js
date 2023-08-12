@@ -37,6 +37,14 @@ const getCategoryById = async (categoryId) => {
   return category;
 };
 
+const getCategoryByName = async (categoryName) => {
+  const query = `
+    SELECT * FROM "Category" WHERE name = $1;
+  `;
+  const category = await db.oneOrNone(query, [categoryName]);
+  return category;
+};
+
 // Function to update a category by ID
 const updateCategoryById = async (categoryId, categoryData) => {
   const query = `
@@ -81,6 +89,7 @@ module.exports = {
   createCategory,
   getCategories,
   getCategoryById,
+  getCategoryByName,
   updateCategoryById,
   deleteCategoryById,
   deleteCategoryByName,

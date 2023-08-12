@@ -36,7 +36,7 @@ const updateCategory = catchAsync(async (req, res) => {
 // Controller to delete a category by ID
 const deleteCategory = catchAsync(async (req, res) => {
   await categoryModel.deleteCategoryById(req.params.categoryId);
-  res.status(httpStatus.NO_CONTENT).send({ message: 'Category deleted' });
+  res.status(httpStatus.OK).send({ message: 'Category deleted' });
 });
 
 module.exports = {

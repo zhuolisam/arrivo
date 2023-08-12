@@ -33,18 +33,7 @@ const decodeToken = (token) => {
   return decoded;
 };
 
-const verifyToken = (token) => {
-  // check if token is valid and not expired
-  const decoded = decodeToken(token);
-  const now = day();
-  const expiresAt = day.unix(decoded.exp);
-  if (now.isAfter(expiresAt)) {
-    return {};
-  }
-  return decoded;
-};
-
 module.exports = {
   generateAccessToken,
-  verifyToken,
+  decodeToken,
 };

@@ -3,7 +3,10 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
+const httpStatus = require('http-status');
 
+const ApiError = require('./utils/ApiError');
+const { errorConverter, errorHandler } = require('./middlewares/error');
 const routes = require('./routers');
 
 // CONFIG
@@ -23,6 +26,17 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api', routes);
+
+// send back a 404 error for any unknown api request
+app.use((req, res, next) => {
+  next(new ApiError(httpStatus.NOT_FOUND, 'Not found'));
+});
+
+// convert error to ApiError, if needed
+app.use(errorConverter);
+
+// handle error
+app.use(errorHandler);
 
 // configure ports
 app.listen(port, () => {
