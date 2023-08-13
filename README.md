@@ -118,6 +118,8 @@ curl -X POST \
 
 2. Payment service is unavailable since webhook URL is not available
 
+3. In this project, I only used access token and they only live 3 hours. In real world, we utilize refresh token so that user can rotate access tokens.
+
 ## Demo
 This demo shows the upgrading of normal user to premium user
 ![gif](assets/demo.gif)
