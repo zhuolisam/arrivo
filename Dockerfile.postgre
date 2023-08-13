@@ -1,0 +1,4 @@
+FROM postgres:13-alpine as db
+WORKDIR /app
+COPY ./seed/seed.sh /docker-entrypoint-initdb.d
+COPY ./seed/seed.sql ./seed/seed.sql

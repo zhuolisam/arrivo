@@ -8,26 +8,45 @@ npm install
 cp .env.example .env
 ```
 
-Recommended way:
-Before you proceed, please create a database called blog-app, and replaced necessary credentials in .env DATABASE_URL
-
+Check `.env` and replace with necessary information, such as the below env:
 ```
-node seed/init.js     //initialise database tables
-node seed/seeder.js   //initialise mock data
+BILLPLZ_COLLECTION_ID=ih29u8ij #your own collection id
+BILLPLZ_SECRET_KEY=39b26f89-3fd9-4b4f-b094-78e23fdc44a6 # your own secret key
+LOCAL_URL=https://2e09-2001-f40-906-5909-6d0c-da87-5e09-7823.ngrok.io # public ip that tunnel to localhost:5000, using ngrok 
+DUMMY_EMAIL=zhuolisam0627@gmail.com # your own email so you can receive the bill
+```
 
+#### Manual way
+
+Before you proceed, please create a database called blog-app, and seed the database. In your terminal:
+```bash
+psql -U postgres -d blog-app -a -f seed/seed.sql
+```
+
+Finally:
+```bash
 npm run start
 ```
 
-After testing everything
+To cleanup database:
 
-```
-node seed/cleanup.js //destory database
+```bash
+node seed/cleanup.js #destory database
 ```
 
-Or docker way:
+#### Docker way (recommended)
 
 ```bash
 docker-compose up --build
+```
+This will create the app, the postgresql with seeded database, and adminer as postgresl admin panel
+`postgres` is exposed at `localhost:5432`
+`adminer` is exposed at `localhost:8080`
+`backend` is exposed at `localhost:5000`
+
+To cleanup:
+```bash
+docker-compose down --volume
 ```
 
 ## Features

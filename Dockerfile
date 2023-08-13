@@ -8,19 +8,13 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies (excluding Husky hooks)
-RUN npm install --production
+RUN npm set-script prepare '' && npm install --production
 
 # Copy source code
 COPY src ./src
 
 # Copy .env file
 COPY .env ./
-
-# Copy seed data
-COPY seed ./seed
-
-# Run the seed 
-RUN node seed/init.js && node seed/seeder.js
 
 # Expose port
 EXPOSE 5000

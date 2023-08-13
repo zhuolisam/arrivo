@@ -2,7 +2,11 @@ version: '3.8'
 
 services:
   postgres:
-    image: postgres:latest
+    image: db
+    build:
+      context: .
+      dockerfile: Dockerfile.postgre
+      target: db
     container_name: my-postgres-container
     environment:
       POSTGRES_USER: postgres
@@ -13,6 +17,14 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
+  adminer:
+    image: adminer
+    container_name: my-adminer-container
+    ports:
+      - '8080:8080'
+    depends_on:
+      - postgres
+      
   express:
     build:
       context: .
