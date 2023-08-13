@@ -73,22 +73,22 @@ List of available routes:
 `DELETE api/v1/users/:userId` - delete user
 
 **Category routes**:\
-`POST /v1/categories` - create a new category\
-`GET /v1/categories` - get all categories\
-`GET /v1/categories/:categoryId` - get category by ID\
-`PATCH /v1/categories/:categoryId` - update category by ID\
-`DELETE /v1/categories/:categoryId` - delete category by ID
+`POST api/v1/categories` - create a new category\
+`GET api/v1/categories` - get all categories\
+`GET api/v1/categories/:categoryId` - get category by ID\
+`PATCH api/v1/categories/:categoryId` - update category by ID\
+`DELETE api/v1/categories/:categoryId` - delete category by ID
 
 **Post routes**:\
-`POST /v1/posts` - create a new post\
-`GET /v1/posts` - get all posts\
-`GET /v1/posts/:postId` - get post by ID\
-`PATCH /v1/posts/:postId` - update post by ID\
-`DELETE /v1/posts/:postId` - delete post by ID
+`POST api/v1/posts` - create a new post\
+`GET api/v1/posts` - get all posts\
+`GET api/v1/posts/:postId` - get post by ID\
+`PATCH api/v1/posts/:postId` - update post by ID\
+`DELETE api/v1/posts/:postId` - delete post by ID
 
 **Payment routes**:\
-`POST /v1/payment/create` - create a new payment for premium membership\
-`POST /v1/payment/webhook` - webhook for Billplz updates
+`POST api/v1/payment/` - create a new payment for premium membership\
+`POST api/v1/payment/webhook` - webhook for Billplz updates
 
 *For all the required params and body inputs, please visit the `validations\` folder*
 
@@ -118,7 +118,7 @@ curl -X POST \
 
 2. Payment service is unavailable since webhook URL is not available
 
-3. In this project, I only used access token and they only live 3 hours. In real world, we utilize refresh token so that user can rotate access tokens.
+3. In this project, I only used access token and they only live for 3 hours. In real world, we implements refresh token so that user can rotate access tokens.
 
 ## Demo
 This demo shows the upgrading of normal user to premium user
