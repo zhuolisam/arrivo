@@ -141,7 +141,7 @@ curl -X POST \
 
 ## Demo
 This demo shows the upgrading of normal user to premium user
-![gif](assets/demo.gif)
+![gif](assets/demo1.gif)
 
 
 My webhook endpoint works, there are incoming Billplz request hitting webhook (tunneling using ngrok)
